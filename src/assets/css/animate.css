@@ -1,0 +1,18 @@
+@keyframes sparkle {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(20px, -20px) scale(1.2);
+  }
+  100% {
+    transform: translate(40px, -40px) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s infinite;
+}
