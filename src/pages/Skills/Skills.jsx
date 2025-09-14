@@ -1,29 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { motion, Reorder } from "framer-motion";
 
-const SkillCard = ({ title, skills }) => (
-  <Card className="bg-gray-900/40 backdrop-blur-md border border-gray-700 rounded-2xl hover:scale-[1.02] transition-all duration-300">
-    <CardContent className="p-6">
-      <h3 className="text-xl text-white font-bold mb-4">{title}</h3>
-      <div className="flex flex-wrap gap-3">
-        {skills.map((skill, index) => (
-          <Badge
-            key={index}
-            className="flex items-center gap-2 bg-gray-800/50 text-gray-100 border-gray-600 py-2 px-3 hover:bg-gray-700"
+const SkillCard = ({ title, skills, index }) => {
+  const [items, setItems] = useState(skills);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      className="relative"
+    >
+      {/* Glow Border */}
+
+      <Card className="relative bg-gray-900/40 backdrop-blur-md border border-gray-700 rounded-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden">
+        <CardContent className="p-6 relative z-10">
+          
+          <h3 className="text-xl text-white font-bold mb-4">{title}</h3>
+
+          {/* Reorderable skills */}
+          <Reorder.Group
+            axis="x"
+            values={items}
+            onReorder={setItems}
+            className="flex flex-wrap gap-3"
           >
-            <img src={skill.icon} alt={skill.name} className="w-5 h-5" />
-            {skill.name}
-          </Badge>
-        ))}
-      </div>
-    </CardContent>
-  </Card>
-);
-
+            {items.map((skill, idx) => (
+              <Reorder.Item
+                key={skill.name}
+                value={skill}
+                whileDrag={{ scale: 1.15, zIndex: 50 }}
+                whileHover={{ scale: 1.08, y: -2 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Badge className="flex items-center gap-2 bg-gray-800/50 text-gray-100 border-gray-600 py-2 px-3 cursor-grab hover:bg-gray-700 active:cursor-grabbing">
+                  <img src={skill.icon} alt={skill.name} className="w-5 h-5" />
+                  {skill.name}
+                </Badge>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+};
 
 const Skills = () => {
-  const skillCategories = [
+    const skillCategories = [
   {
     title: "Programming Languages",
     skills: [
@@ -160,20 +187,33 @@ const Skills = () => {
   },
 ];
 
-
   return (
-<section className="container mx-auto px-4 py-10 text-white bg-[#020617] ">
-  <h2 className="text-3xl font-bold mb-8">Skills</h2>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {skillCategories.map((category, index) => (
+    <section className="min-h-screen relative overflow-hidden py-20 bg-[#020617]">
+      <div className="container mx-auto px-20 relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent"
+        >
+          Skills
+        </motion.h2>
+
+<div className="columns-1 sm:columns-2 lg:columns-3 gap-8">
+  {skillCategories.map((category, index) => (
+    <div key={index} className="mb-8 break-inside-avoid">
       <SkillCard
-        key={index}
+        index={index}
         title={category.title}
         skills={category.skills}
       />
-    ))}
-  </div>
-</section>
+    </div>
+  ))}
+</div>
+
+
+      </div>
+    </section>
   );
 };
 
