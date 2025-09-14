@@ -1,62 +1,19 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import IconCloudDemo from "@/components/globe";
-import { Code2, Paintbrush, Database, Layout, Cpu, Cloud } from "lucide-react";
-import {
-  FaReact,
-  FaNodeJs,
-  FaPython,
-  FaDocker,
-  FaGitAlt,
-  FaLinux,
-  FaFigma,
-  FaAws,
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiPostgresql,
-  SiMongodb,
-  SiGraphql,
-  SiJest,
-  SiWebpack,
-  SiRedux,
-  SiFirebase,
-  SiVercel,
-  SiVite,
-} from "react-icons/si";
-import { TbBrandVscode } from "react-icons/tb";
-import { BsFileEarmarkCode, BsGrid1X2 } from "react-icons/bs";
-import { MdAnimation } from "react-icons/md";
-import { FcWorkflow } from "react-icons/fc";
 
-const SkillCard = ({ icon: Icon, title, skills, color }) => (
-  <Card className="group relative overflow-hidden bg-gray-900/80 border-gray-700 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20">
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(100,100,255,0.1)] to-transparent group-hover:via-[rgba(100,100,255,0.2)] animate-shimmer"></div>
-    <CardContent className="p-6 relative z-10">
-      <div className="flex items-center gap-4 mb-6">
-        <div
-          className={`p-3 rounded-xl bg-gray-800/50 ${color} group-hover:scale-110 transition-transform duration-300`}
-        >
-          <Icon className="w-8 h-8" />
-        </div>
-        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-          {title}
-        </h3>
-      </div>
-      <div className="flex flex-wrap gap-2">
+const SkillCard = ({ title, skills }) => (
+  <Card className="bg-gray-900/40 backdrop-blur-md border border-gray-700 rounded-2xl hover:scale-[1.02] transition-all duration-300">
+    <CardContent className="p-6">
+      <h3 className="text-xl text-white font-bold mb-4">{title}</h3>
+      <div className="flex flex-wrap gap-3">
         {skills.map((skill, index) => (
           <Badge
             key={index}
-            variant="outline"
-            className="group/badge relative bg-gray-800/50 hover:bg-gray-700/80 text-gray-100 border-gray-600 flex items-center gap-2 py-2 px-3 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+            className="flex items-center gap-2 bg-gray-800/50 text-gray-100 border-gray-600 py-2 px-3 hover:bg-gray-700"
           >
-            <span className="transform group-hover/badge:scale-110 transition-transform duration-300">
-              {skill.icon}
-            </span>
-            <span className="font-medium">{skill.name}</span>
+            <img src={skill.icon} alt={skill.name} className="w-5 h-5" />
+            {skill.name}
           </Badge>
         ))}
       </div>
@@ -64,203 +21,160 @@ const SkillCard = ({ icon: Icon, title, skills, color }) => (
   </Card>
 );
 
-const SkillsSection = () => {
+
+const Skills = () => {
   const skillCategories = [
-    {
-      icon: Code2,
-      title: "Frontend Development",
-      color: "text-blue-400",
-      skills: [
-        { name: "React", icon: <FaReact className="w-4 h-4 text-[#61DAFB]" /> },
-        {
-          name: "Next.js",
-          icon: <SiNextdotjs className="w-4 h-4 text-white" />,
-        },
-        {
-          name: "TypeScript",
-          icon: <SiTypescript className="w-4 h-4 text-[#3178C6]" />,
-        },
-        {
-          name: "Tailwind CSS",
-          icon: <SiTailwindcss className="w-4 h-4 text-[#38B2AC]" />,
-        },
-        {
-          name: "HTML5",
-          icon: <BsFileEarmarkCode className="w-4 h-4 text-[#E34F26]" />,
-        },
-        {
-          name: "CSS3",
-          icon: <BsFileEarmarkCode className="w-4 h-4 text-[#1572B6]" />,
-        },
-      ],
-    },
-    {
-      icon: Database,
-      title: "Backend Development",
-      color: "text-green-400",
-      skills: [
-        {
-          name: "Node.js",
-          icon: <FaNodeJs className="w-4 h-4 text-[#339933]" />,
-        },
-        {
-          name: "Python",
-          icon: <FaPython className="w-4 h-4 text-[#3776AB]" />,
-        },
-        {
-          name: "PostgreSQL",
-          icon: <SiPostgresql className="w-4 h-4 text-[#336791]" />,
-        },
-        {
-          name: "MongoDB",
-          icon: <SiMongodb className="w-4 h-4 text-[#47A248]" />,
-        },
-        {
-          name: "REST APIs",
-          icon: <BsGrid1X2 className="w-4 h-4 text-[#FF6C37]" />,
-        },
-        {
-          name: "GraphQL",
-          icon: <SiGraphql className="w-4 h-4 text-[#E10098]" />,
-        },
-      ],
-    },
-    {
-      icon: Layout,
-      title: "UI/UX Design",
-      color: "text-purple-400",
-      skills: [
-        { name: "Figma", icon: <FaFigma className="w-4 h-4 text-[#F24E1E]" /> },
-        {
-          name: "Responsive Design",
-          icon: <Layout className="w-4 h-4 text-[#38B2AC]" />,
-        },
-        {
-          name: "Wireframing",
-          icon: <BsGrid1X2 className="w-4 h-4 text-[#9CA3AF]" />,
-        },
-        {
-          name: "Prototyping",
-          icon: <MdAnimation className="w-4 h-4 text-[#F59E0B]" />,
-        },
-      ],
-    },
-    {
-      icon: Cloud,
-      title: "Cloud & DevOps",
-      color: "text-orange-400",
-      skills: [
-        { name: "AWS", icon: <FaAws className="w-4 h-4 text-[#FF9900]" /> },
-        {
-          name: "Docker",
-          icon: <FaDocker className="w-4 h-4 text-[#2496ED]" />,
-        },
-        { name: "CI/CD", icon: <FcWorkflow className="w-4 h-4" /> },
-        {
-          name: "Kubernetes",
-          icon: <BsGrid1X2 className="w-4 h-4 text-[#326CE5]" />,
-        },
-        { name: "Git", icon: <FaGitAlt className="w-4 h-4 text-[#F05032]" /> },
-        { name: "Linux", icon: <FaLinux className="w-4 h-4 text-[#FCC624]" /> },
-      ],
-    },
-    {
-      icon: Cpu,
-      title: "Tools & Technologies",
-      color: "text-pink-400",
-      skills: [
-        {
-          name: "VS Code",
-          icon: <TbBrandVscode className="w-4 h-4 text-[#007ACC]" />,
-        },
-        { name: "Jest", icon: <SiJest className="w-4 h-4 text-[#C21325]" /> },
-        {
-          name: "Webpack",
-          icon: <SiWebpack className="w-4 h-4 text-[#8DD6F9]" />,
-        },
-        { name: "Redux", icon: <SiRedux className="w-4 h-4 text-[#764ABC]" /> },
-        {
-          name: "Firebase",
-          icon: <SiFirebase className="w-4 h-4 text-[#FFCA28]" />,
-        },
-        { name: "Vercel", icon: <SiVercel className="w-4 h-4 text-white" /> },
-        { name: "Vite", icon: <SiVite className="w-4 h-4 text-[#646CFF]" /> },
-      ],
-    },
-    {
-      icon: Paintbrush,
-      title: "Creative Skills",
-      color: "text-yellow-400",
-      skills: [
-        {
-          name: "UI Animation",
-          icon: <MdAnimation className="w-4 h-4 text-[#FF4081]" />,
-        },
-        {
-          name: "SVG Animation",
-          icon: <MdAnimation className="w-4 h-4 text-[#00C853]" />,
-        },
-        {
-          name: "3D Modeling",
-          icon: <Cpu className="w-4 h-4 text-[#7C4DFF]" />,
-        },
-        {
-          name: "Motion Graphics",
-          icon: <MdAnimation className="w-4 h-4 text-[#FF6D00]" />,
-        },
-      ],
-    },
-  ];
+  {
+    title: "Programming Languages",
+    skills: [
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "C", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+      { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "Kotlin", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" },
+      { name: "Shell Scripting", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
+    ],
+  },
+  {
+    title: "Frontend & Styling",
+    skills: [
+      { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "Redux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" },
+      { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+      { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+      { name: "Sass/SCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
+      { name: "Material UI", icon: "https://raw.githubusercontent.com/mui/material-ui/master/docs/public/static/logo.png" },
+      { name: "Framer Motion", icon: "https://seeklogo.com/images/F/framer-motion-logo-DA1E33CAA1-seeklogo.com.png" },
+      { name: "GSAP", icon: "https://greensock.com/uploads/monthly_2020_05/gsap-logo.png.3f8a5d44ee71a609ccbcab843e1cda39.png" },
+    ],
+  },
+  {
+    title: "Backend & APIs",
+    skills: [
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "Flask", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
+      { name: "FastAPI", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/fastapi/fastapi-original.svg" },
+      { name: "REST APIs", icon: "https://img.icons8.com/external-flat-juicy-fish/60/000000/external-api-api-flat-flat-juicy-fish.png" },
+      { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+      { name: "Socket.IO", icon: "https://socket.io/images/logo.svg" },
+      { name: "Axios", icon: "https://axios-http.com/assets/logo.svg" },
+    ],
+  },
+  {
+    title: "Databases",
+    skills: [
+      { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+      { name: "SQLite", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "Firebase Firestore", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+      { name: "Pinecone", icon: "https://avatars.githubusercontent.com/u/78746364?s=200&v=4" },
+      { name: "Milvus", icon: "https://milvus.io/static/favicons/favicon-96x96.png" },
+    ],
+  },
+  {
+    title: "Machine Learning & AI",
+    skills: [
+      { name: "NumPy", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+      { name: "Pandas", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+      { name: "Scikit-learn", icon: "https://avatars.githubusercontent.com/u/365630?v=4" },
+      { name: "Matplotlib", icon: "https://matplotlib.org/_static/logo2.svg" },
+      { name: "Seaborn", icon: "https://seaborn.pydata.org/_static/logo-wide-lightbg.svg" },
+      { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+      { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" },
+      { name: "Hugging Face", icon: "https://huggingface.co/front/assets/huggingface_logo-noborder.svg" },
+      { name: "LangChain", icon: "https://avatars.githubusercontent.com/u/126733545?s=200&v=4" },
+      { name: "LlamaIndex", icon: "https://avatars.githubusercontent.com/u/127446610?s=200&v=4" },
+      { name: "MLflow", icon: "https://mlflow.org/docs/latest/_static/MLflow-logo-final-black.png" },
+      { name: "Kubeflow", icon: "https://www.kubeflow.org/images/logo.png" },
+      { name: "BentoML", icon: "https://bentoml.org/images/bento.svg" },
+      { name: "Weights & Biases", icon: "https://wandb.ai/favicon.ico" },
+      { name: "Gradio", icon: "https://avatars.githubusercontent.com/u/86145616?s=200&v=4" },
+      { name: "Streamlit", icon: "https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.svg" },
+    ],
+  },
+  {
+    title: "Cloud & DevOps",
+    skills: [
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" },
+      { name: "GCP", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" },
+      { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+      { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" },
+      { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" },
+      { name: "ArgoCD", icon: "https://argo-cd.readthedocs.io/en/stable/assets/argo.png" },
+      { name: "FluxCD", icon: "https://fluxcd.io/img/favicon.png" },
+      { name: "GitHub Actions", icon: "https://avatars.githubusercontent.com/u/44036562?s=200&v=4" },
+      { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" },
+      { name: "TeamCity", icon: "https://www.jetbrains.com/company/brand/img/jetbrains-logo.png" },
+      { name: "Octopus Deploy", icon: "https://avatars.githubusercontent.com/u/1299384?s=200&v=4" },
+      { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" },
+      { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" },
+      { name: "ELK Stack", icon: "https://seeklogo.com/images/E/elastic-logo-4C2D0E6CE9-seeklogo.com.png" },
+      { name: "Splunk", icon: "https://www.splunk.com/content/dam/splunk2/images/brand/splunk-logo.svg" },
+      { name: "SonarQube", icon: "https://cdn.worldvectorlogo.com/logos/sonarqube.svg" },
+      { name: "Snyk", icon: "https://cdn.worldvectorlogo.com/logos/snyk-1.svg" },
+    ],
+  },
+  {
+    title: "Tools & Productivity",
+    skills: [
+      { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Git Bash", icon: "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" },
+      { name: "JIRA", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg" },
+      { name: "Trello", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/trello/trello-plain.svg" },
+      { name: "Notion", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg" },
+      { name: "Lucidchart", icon: "https://cdn.worldvectorlogo.com/logos/lucidchart-1.svg" },
+      { name: "Draw.io", icon: "https://upload.wikimedia.org/wikipedia/commons/e/e8/Diagrams.net_Logo.svg" },
+      { name: "Cloudcraft", icon: "https://cloudcraft.co/favicon.ico" },
+      { name: "Postman", icon: "https://www.svgrepo.com/show/354202/postman-icon.svg" },
+      { name: "Thunder Client", icon: "https://github.com/rangav/thunder-client-support/raw/master/images/thunder-client-icon.png" },
+      { name: "Jest", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" },
+      { name: "React Testing Library", icon: "https://testing-library.com/img/octopus-128x128.png" },
+      { name: "Supertest", icon: "https://avatars.githubusercontent.com/u/9349743?s=200&v=4" },
+      { name: "NPM", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" },
+      { name: "Yarn", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/yarn/yarn-original.svg" },
+      { name: "Webpack", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg" },
+      { name: "Babel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/babel/babel-original.svg" },
+    ],
+  },
+  {
+    title: "Core CS Concepts",
+    skills: [
+      { name: "DSA", icon: "https://cdn-icons-png.flaticon.com/512/2721/2721292.png" },
+      { name: "OOP", icon: "https://cdn-icons-png.flaticon.com/512/2721/2721292.png" },
+      { name: "Operating Systems", icon: "https://cdn-icons-png.flaticon.com/512/4248/4248443.png" },
+      { name: "DBMS", icon: "https://cdn-icons-png.flaticon.com/512/4248/4248443.png" },
+      { name: "System Design", icon: "https://cdn-icons-png.flaticon.com/512/1048/1048943.png" },
+      { name: "SDLC", icon: "https://cdn-icons-png.flaticon.com/512/270/270798.png" },
+      { name: "Agile", icon: "https://cdn-icons-png.flaticon.com/512/906/906324.png" },
+    ],
+  },
+];
+
 
   return (
-    <main className="pt-15 lg:pt-0 text-white min-h-screen bg-[#04081A] relative">
-      {/* Grid Background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
-
-      <section className="container mx-auto px-4 py-11 relative z-10">
-        <div className="flex justify-center items-center ">
-          <IconCloudDemo />
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <SkillCard
-              key={index}
-              icon={category.icon}
-              title={category.title}
-              skills={category.skills}
-              color={category.color}
-            />
-          ))}
-        </div>
-      </section>
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-        .bg-grid-pattern {
-          background-image: linear-gradient(
-              to right,
-              rgba(100, 100, 255, 0.1) 1px,
-              transparent 1px
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(100, 100, 255, 0.1) 1px,
-              transparent 1px
-            );
-          background-size: 30px 30px;
-        }
-      `}</style>
-    </main>
+<section className="container mx-auto px-4 py-10 text-white bg-[#020617] ">
+  <h2 className="text-3xl font-bold mb-8">Skills</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {skillCategories.map((category, index) => (
+      <SkillCard
+        key={index}
+        title={category.title}
+        skills={category.skills}
+      />
+    ))}
+  </div>
+</section>
   );
 };
 
-export default SkillsSection;
+export default Skills;

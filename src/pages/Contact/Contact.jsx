@@ -43,48 +43,36 @@ export default function Contact() {
     return isValid;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) {
-      setStatus("Please fill in all required fields correctly.");
-      return;
+  if (!validateForm()) {
+    setStatus("⚠️ Please fill in all required fields correctly.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      setStatus("✅ Message sent successfully!");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setErrors({});
+    } else {
+      setStatus("❌ Failed to send message.");
     }
+  } catch (error) {
+    console.error("Error:", error);
+    setStatus("❌ An error occurred. Please try again.");
+  }
+};
 
-    // Create a new FormData object to send to Web3Forms API
-    const form = new FormData();
-    form.append("access_key", "90f4b8af-e590-42b0-beaf-10b18f66a703"); // Replace with your Web3Forms access key
-    form.append("name", formData.name);
-    form.append("email", formData.email);
-    form.append("subject", formData.subject || "New Contact Form Submission");
-    form.append("message", formData.message);
-
-    try {
-      // Send form data to Web3Forms API
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: form,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setStatus("Message sent successfully!");
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
-        setErrors({});
-      } else {
-        setStatus(result.message || "There was an error sending your message.");
-      }
-    } catch (error) {
-      setStatus("An error occurred. Please try again.");
-      console.error("Error:", error);
-    }
-  };
 
   return (
     <main
@@ -112,7 +100,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold">Email</h3>
-                    <p className="text-gray-400">olovajs@gmail.com</p>
+                    <p className="text-gray-400">barivazhagan7@gmail.com</p>
                   </div>
                 </div>
 
@@ -122,7 +110,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold">Location</h3>
-                    <p className="text-gray-400">Laxmipure, Natore 6400</p>
+                    <p className="text-gray-400">Perambalur, Tamilnadu</p>
                   </div>
                 </div>
               </div>

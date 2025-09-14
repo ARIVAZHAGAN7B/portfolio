@@ -25,8 +25,6 @@ const GridBackground = () => (
 
 export default function Hero() {
   const words = [
-    "AI Product Developer",
-    "AI Platform Engineer",
     "Full-Stack Developer (Web and Mobile)",
     "Machine Learning Engineer",
     "Cloud Engineer",
@@ -40,7 +38,7 @@ export default function Hero() {
   const [code] = useState(`
 const profile = {
     name: 'Arivazhagan B',
-    title: 'AI Product Developer | AI Platform Engineer | Full-Stack Developer',
+    title: "Full-Stack Developer| "Machine Learning Engineer"| "Cloud Engineer",
     hardWorker: true,
     quickLearner: true,
     problemSolver: true,
